@@ -20,5 +20,18 @@
         <p><a href="{{ parent_section.permalink | safe }}">← Back to blog section</a></p>
     {% endif %}
 
+    {% for translation in page.translations %}
+         {% if translation.lang != page.lang %}
+            <p><a href="{{ translation.permalink | safe }}">
+                {% set lang_name = config.extra.language_names[translation.lang] %}
+                {% if lang_name %}
+                    {{ lang_name }} translation
+                {% else %}
+                    Translation to {{ translation.lang }}
+                {% endif %}
+            </a></p>
+         {% endif %}
+    {% endfor %}
+
     {{ page.content | safe }}
 {% endblock content %}
